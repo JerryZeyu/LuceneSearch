@@ -78,7 +78,7 @@ public class BuildIndex {
     ////////////////////test /////////////////////////////////
     private static String sourceGeonames = "ontology/allCountries.txt";
 
-    private static String sourceQueries = "mentions/allmentions_train.csv";
+    private static String sourceQueries = "mentions/allmentions_dev.csv";
 
     private static String indexGeonames = "index/geoname/";
 
@@ -113,7 +113,7 @@ public class BuildIndex {
         ArrayList<ArrayList<String>> listOMentions = new ArrayList<ArrayList<String>>();
         ArrayList<String> mentions = new ArrayList<String>();
         br = new BufferedReader(new FileReader(sourceQueries));
-        FileWriter csvWriter = new FileWriter(searchOutput+ "mentions_train_predictions_strategy11.csv");
+        FileWriter csvWriter = new FileWriter(searchOutput+ "mentions_dev_predictions_strategy10.csv");
         while ((line = br.readLine()) != null) {
             // System.out.println(line);
             // use comma as separator
@@ -279,10 +279,10 @@ public class BuildIndex {
 
         results.addAll(scoredEntries(groupingSearch,   searcherGeonames,  nameQueryParser,  filterSpecialSpaceMention +"~",5,"Fuzzy_Match" ));
         results.addAll(scoredEntries(groupingSearch,  searcherGeonames,  NgQueryParser,  filterSpecialMention,60,"Ngram_Match"));
-        results.addAll(scoredEntries(groupingSearch,  searcherGeonames,  tokenQueryParser,  filterSpecialMention,10000,"Token_Match"));
+        results.addAll(scoredEntries(groupingSearch,  searcherGeonames,  tokenQueryParser,  filterSpecialMention,1200,"Token_Match"));
 
-        results.addAll(scoredEntries(groupingSearch,  searcherGeonames,  abbreviationQueryParser,  filterSpecialSpaceMention,10000,"Abbreviation_Match"));
-        results.addAll(scoredEntries(groupingSearch,  searcherGeonames,  coutrycodeQueryParser,  filterSpecialSpaceMention,10000,"Countrycode_Match"));
+        results.addAll(scoredEntries(groupingSearch,  searcherGeonames,  abbreviationQueryParser,  filterSpecialSpaceMention,5000,"Abbreviation_Match"));
+        results.addAll(scoredEntries(groupingSearch,  searcherGeonames,  coutrycodeQueryParser,  filterSpecialSpaceMention,5000,"Countrycode_Match"));
 //        results.addAll(scoredEntries(groupingSearch,  searcherGeonames,  alternateccQueryParser,  filterSpecialSpaceMention,5000,"Alternatecc_Match"));
 
 
